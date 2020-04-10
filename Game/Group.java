@@ -1,7 +1,9 @@
 package Game;
 
 public class Group{
-  //Melee 0 Mage 1 Range 2
+  //Melee 0 
+  //Mage 1 
+  //Range 2
   static int group = -1;
   static int difficulty;
 

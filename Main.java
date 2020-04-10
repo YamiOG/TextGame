@@ -27,6 +27,8 @@ class Main {
   public static final String CYAN_BACKGROUND = "\u001B[46m";
   public static final String WHITE_BACKGROUND = "\u001B[47m";
 
+  public static final String CLEAR = "\033[H\033[2J";
+
   public static void Print(String color, String text, boolean ln){
     if(ln){
       System.out.println(color + text + RESET);
@@ -55,21 +57,21 @@ class Main {
   public static void Setup(){
     System.out.print("Loading");
     Delay(1000);
-    System.out.print(".");
-    Delay(1000);
-    System.out  .print(".");
-    Delay(1000);
-    System.out.println(".");
-    Delay(1000);
+    for(int i = 0; i < 10; i++){
+      Print(WHITE, "( ͡° ͜ʖ ͡°)", false);
+      Delay(250);
+    }
   }
 
   public static void Help(){
     Print(YELLOW, "Add Help Stuff here later for the noobs", true);
+    Delay(400);
     MenuHandler();
   }
 
   public static void MenuHandler(){
-    Print(RED, " ____  __  ____  ____  __ _  __  ____  ____ \n(  __)/  \\(  _ \\(_  _)(  ( \\(  )(_  _)(  __)\n ) _)(  O ))   /  )(  /    / )(   )(   ) _) \n(__)  \\__/(__\\_) (__) \\_)__)(__) (__) (____)", true);
+    System.out.print(CLEAR);
+    Print(RED, "\n ____  __  ____  ____  __ _  __  ____  ____ \n(  __)/  \\(  _ \\(_  _)(  ( \\(  )(_  _)(  __)\n ) _)(  O ))   /  )(  /    / )(   )(   ) _) \n(__)  \\__/(__\\_) (__) \\_)__)(__) (__) (____)", true);
     Print(RED, "\t\tWill you kill the little kids", true);
     Print(GREEN, "1. Start", true);
     Print(YELLOW, "2. Help", true);
@@ -86,15 +88,13 @@ class Main {
     }
     else{
       Print(RED, "Your Retarded", true);
+      Delay(400);
       MenuHandler();
     }
   }
 
-  public static void EventHandler(){
-    int input = scan.nextInt();
-  }
-
   public static void Start(){
+    System.out.print("\033[H\033[2J");
     Print(GREEN, "1: Easy", true);
     Print(YELLOW, "2: Normal", true);
     Print(RED, "3: Hard", true); 
@@ -112,15 +112,24 @@ class Main {
     else{
       Print(RED, "That is not a valid option.", true);
     }
+  }
 
-    
+  public static void EventHandler(){
+
+  }
+
+  public static void RenderHandler(){
+    System.out.print(CLEAR);
+    Print(RED, "###############@###############\n###############################\n###############################\n###############################\n###############################\n", true);
+    Delay(1);
   }
 
   public static void main(String[] args){
     Setup();
     MenuHandler();
     while(running){
-      
+      EventHandler();
+      RenderHandler();
     }
   }
 }
